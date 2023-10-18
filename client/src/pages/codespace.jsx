@@ -1,54 +1,30 @@
-import { useState, useEffect} from 'react';
-import SockJS from 'sockjs-client';
-import Stomp from 'stompjs';
+import React, { useState } from 'react';
+import { useWebSocketConnection } from '../hooks/usewsconnection.jsx';
 import { python } from "@codemirror/lang-python"
 import { tokyoNight } from "@uiw/codemirror-theme-tokyo-night"
 import CodeMirror from "@uiw/react-codemirror";
 
-let stompClient = null;
-
 const CodeSpace = () => {
   const [message, setMessage] = useState("");
+  
+  const stompClient = useWebSocketConnection(
+    "http://localhost:8080/ws",
+    "/codespace/codeupdate",
+    setMessage
+  );
 
-  useEffect(() => {
-    const initializeWebSocket = () => {
-      const socket = new SockJS("http://localhost:8080/ws");
-      stompClient = Stomp.over(socket);
-
-      stompClient.connect({}, (frame) => {
-        console.log("Connected: " + frame);
-      
-        if (stompClient.connected) { 
-          stompClient.subscribe("/codespace/codeupdate", (response) => {
-            setMessage(response.body); 
-          });
-        }
-      });
-    };
-
-    initializeWebSocket();
-
-
-    return () => {
-      if (stompClient && stompClient.connected) { 
-        stompClient.disconnect();
-      }
-    };
-  }, []);
-
-  function sendMessage(text) {
-    if (stompClient) { 
-      stompClient.send("/app/userinput", {}, text);
-    } else {
-      console.log("Connection is not established or stompClient is not initialized. Cannot send the message.");
+  // Function to send message
+  const sendMessage = (msg) => {
+    if (stompClient) {
+      stompClient.send("/app/userinput", {}, msg);
     }
-  }
+  };
 
   const handleInputMessageChange = (value) => {
     sendMessage(value);
   };
-  
 
+  // Rest of your component
   return (
     <div className="h-screen flex-row">
       <div className="flex float-right flex-col my-[1%] w-[45%] h-screen mx-[1%]"> 
