@@ -13,7 +13,6 @@ const CodeSpace = () => {
     setMessage
   );
 
-  // Function to send message
   const sendMessage = (msg) => {
     if (stompClient) {
       stompClient.send("/app/userinput", {}, msg);
@@ -24,7 +23,6 @@ const CodeSpace = () => {
     sendMessage(value);
   };
 
-  // Rest of your component
   return (
     <div className="h-screen flex-row">
       <div className="flex float-right flex-col my-[1%] w-[45%] h-screen mx-[1%]"> 
