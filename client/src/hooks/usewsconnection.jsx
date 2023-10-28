@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 
-export const useWebSocketConnection = (url, subscribeUrl, onMessageReceived) => {
+export const useWebSocketConnection = (url, roomId, subscribeUrl, onMessageReceived) => {
   const [stompClient, setStompClient] = useState(null);
 
   useEffect(() => {
-    const socket = new SockJS(url);
+    const socket = new SockJS(`${url}`);
     const client = Stomp.over(socket);
 
     client.connect({}, (frame) => {
@@ -25,7 +25,7 @@ export const useWebSocketConnection = (url, subscribeUrl, onMessageReceived) => 
         client.disconnect();
       }
     };
-  }, [url, subscribeUrl, onMessageReceived]);
+  }, [url, roomId, subscribeUrl, onMessageReceived]);
 
   return stompClient;
 };

@@ -3,15 +3,20 @@ import { useWebSocketConnection } from '../hooks/usewsconnection.jsx';
 import { python } from "@codemirror/lang-python";
 import { tokyoNight } from "@uiw/codemirror-theme-tokyo-night";
 import CodeMirror from "@uiw/react-codemirror";
+import { useParams } from "react-router-dom"
 
 const CodeSpace = () => {
+  const { roomId } = useParams();
   const [code, setCode] = useState("");
   const [pyodide, setPyodide]  = useState(null);
   const stompClient = useWebSocketConnection(
     "http://localhost:8080/ws",
-    "/codespace/codeupdate",
+    roomId,
+    `/codespace/${roomId}/codeupdate`,
     setCode
   );
+  
+  
 
   useEffect(() => {
     (async function() {
@@ -25,7 +30,7 @@ const CodeSpace = () => {
 
   const sendCode = (code) => {
     if (stompClient) {
-      stompClient.send("/app/userinput", {}, code);
+      stompClient.send(`/app/${roomId}/userinput`, {}, code);
     }
   };
 

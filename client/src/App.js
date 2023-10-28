@@ -28,7 +28,7 @@ function App() {
             />
 
             <Route
-              path = "/codespace/:roomid"
+              path = "/codespace/:roomId"
               element = {<CodeSpace/>}
             />
           </Routes>
