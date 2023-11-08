@@ -4,6 +4,7 @@ import Landing from './pages/landing';
 import CodeSpace from './pages/codespace';
 import SignUp from './pages/signup';
 import SignIn from './pages/signin';
+import Rooms from './pages/rooms';
 
 function App() {
   return (
@@ -30,6 +31,11 @@ function App() {
             <Route
               path = "/codespace/:roomId"
               element = {<CodeSpace/>}
+            />
+
+            <Route 
+              path = "/rooms"
+              element = {<Rooms />}
             />
           </Routes>
         </div>
