@@ -41,17 +41,19 @@ const Room = ({room}) => {
   }
 
   return (
-    <div>
-      <h1> {room.roomName} </h1>
-      <h1> {room.roomUsers} </h1>
-      <h1> {room.roomType} </h1>
-      <button onClick={room.roomType === "Public" ? joinPublicRoom : joinPrivateRoom}> Join Room </button>
+    <div className="flex flex-col bg-secondary p-4 rounded-lg text-left w-[50%] h-auto my-2">
+      <h1> Room Name: {room.roomName} </h1>
+      <h1>  {room.roomUsers} </h1>
+      <h1> Room Type: {room.roomType} </h1>
+      
       {room.roomType === "Private" &&
         <input
           onChange = {(e) => setPasscode(e.target.value)}
-          className="text-black"
+          className="text-black text-center"
+          placeholder="Enter the passcode for this room"
         />
       }
+      <button onClick={room.roomType === "Public" ? joinPublicRoom : joinPrivateRoom}> Join Room </button>
     </div>
   )
 }

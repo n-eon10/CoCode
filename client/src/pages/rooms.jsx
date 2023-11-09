@@ -23,7 +23,7 @@ const Rooms = () => {
   
 
   return (
-    <div> 
+    <div className="flex flex-col items-center"> 
       {rooms && rooms.length > 0 ? (
         rooms.map((room) => (
           <Room key={room._id} room={room} />
