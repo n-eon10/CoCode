@@ -5,7 +5,7 @@ import { useCreateRoom } from "../hooks/useCreateRoom";
 const Rooms = () => {
   const createRoom  = useCreateRoom();
   const [rooms, setRooms] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // Add this line
+  const [isLoading, setIsLoading] = useState(true); 
   const [showCreateRoom, setShowCreateNewRoom] = useState(false);
   const [roomName, setRoomName] = useState(null);
   const [roomType, setRoomType] = useState("Public");
@@ -17,7 +17,7 @@ const Rooms = () => {
 
   useEffect(() => {
     const fetchRooms = async () => {
-      setIsLoading(true); // Add this line
+      setIsLoading(true); 
       const response = await fetch("http://localhost:8080/api/rooms/getall");
 
       const json = await response.json();
@@ -26,7 +26,7 @@ const Rooms = () => {
         console.log(json);
         setRooms(json);
       }
-      setIsLoading(false); // Add this line
+      setIsLoading(false); 
     }
 
     fetchRooms();
