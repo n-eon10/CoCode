@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export const NavBar = () => {
+  const { user } = useAuthContext();
   
   return (
     <div className="w-full flex justify-between items-center">
@@ -11,7 +13,7 @@ export const NavBar = () => {
         </h1> 
       </Link>
 
-      <div className="flex">
+      {!user && <div className="flex">
         <Link to = "/signup">
           <button className="px-4 w-32 rounded-full bg-accent">
             Sign Up
@@ -23,7 +25,7 @@ export const NavBar = () => {
             Sign In
           </button>
         </Link>
-      </div>
+      </div>}
     </div>
   )
 }
