@@ -11,15 +11,15 @@ const Landing = () => {
       </div>
 
       <div className=" relative top-[50%] h-[30%] flex flex-row rounded-lg">
-        <div className="bg-white w-[33%] mx-[1%] h-full rounded-lg">
+        <div className="bg-white w-[33%] mx-[1%] h-full rounded-lg text-black">
           TALKING POINT 1
         </div>
 
-        <div className="bg-white w-[33%] mx-[1%] h-full rounded-lg">
+        <div className="bg-white w-[33%] mx-[1%] h-full rounded-lg text-black">
           TALKING POINT 2
         </div>
 
-        <div className="bg-white w-[33%] mx-[1%] h-full rounded-lg">
+        <div className="bg-white w-[33%] mx-[1%] h-full rounded-lg text-black">
           TALKING POINT 3
         </div>
       </div>
