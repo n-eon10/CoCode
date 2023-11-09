@@ -1,13 +1,17 @@
 import './App.css';
-import {Routes, Route, BrowserRouter} from "react-router-dom";
+import {Routes, Route, BrowserRouter, Navigate} from "react-router-dom";
 import Landing from './pages/landing';
 import CodeSpace from './pages/codespace';
 import SignUp from './pages/signup';
 import SignIn from './pages/signin';
 import Rooms from './pages/rooms';
 import NavBar from './components/navbar';
+import { useAuthContext } from './hooks/useAuthContext';
 
 function App() {
+
+  const { user } = useAuthContext();
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -18,27 +22,27 @@ function App() {
           <Routes>
             <Route
               path = "/"
-              element = {<Landing/>}
+              element = {!user ? <Landing/> : <Navigate to = "/rooms" />}
             />
 
             <Route 
               path = "/signup"
-              element = {<SignUp/>}
+              element = {!user ? <SignUp/> : <Navigate to = "/rooms" />}
             />
 
             <Route  
               path = "/signin"
-              element = {<SignIn/>}
+              element = {!user ? <SignIn/> : <Navigate to = "/rooms" />}
             />
 
             <Route
               path = "/codespace/:roomId"
-              element = {<CodeSpace/>}
+              element = {user ? <CodeSpace/> : <Navigate to = "/" />}
             />
 
             <Route 
               path = "/rooms"
-              element = {<Rooms />}
+              element = {user ? <Rooms /> : <Navigate to = "/" />}
             />
           </Routes>
         </div>
