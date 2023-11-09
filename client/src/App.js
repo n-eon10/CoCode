@@ -5,11 +5,14 @@ import CodeSpace from './pages/codespace';
 import SignUp from './pages/signup';
 import SignIn from './pages/signin';
 import Rooms from './pages/rooms';
+import NavBar from './components/navbar';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+
+        <NavBar/>
         
         <div className='pages'>
           <Routes>
